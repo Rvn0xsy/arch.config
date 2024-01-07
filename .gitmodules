@@ -1,0 +1,9 @@
+[submodule ".config/ranger/plugins/ranger-archives"]
+	path = .config/ranger/plugins/ranger-archives
+	url = https://github.com/maximtrp/ranger-archives.git
+[submodule ".config/ranger/plugins/ranger-fzf-filter"]
+	path = .config/ranger/plugins/ranger-fzf-filter
+	url = https://github.com/MuXiu1997/ranger-fzf-filter
+[submodule ".config/ranger/plugins/ranger_devicons"]
+	path = .config/ranger/plugins/ranger_devicons
+	url = https://github.com/alexanderjeurissen/ranger_devicons

@@ -1,15 +1,20 @@
 [Unit]
 Description=clash daemon
+After=network.target NetworkManager.service systemd-networkd.service
 
 [Service]
 Type=simple
 StandardError=journal
 User=clash
 Group=clash
-CapabilityBoundingSet=CAP_NET_BIND_SERVICE
-AmbientCapabilities=CAP_NET_BIND_SERVICE
+LimitNPROC=500
+LimitNOFILE=1000000
+CapabilityBoundingSet=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME
+AmbientCapabilities=CAP_NET_ADMIN CAP_NET_RAW CAP_NET_BIND_SERVICE CAP_SYS_TIME
+Restart=always
+ExecStartPre=/usr/bin/sleep 1s
 ExecStart=/usr/bin/clash -d /home/arch/.config/clash
 Restart=on-failure
 
 [Install]
-WantedBy=default.target
+WantedBy=multi-user.target
