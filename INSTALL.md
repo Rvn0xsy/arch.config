@@ -2,6 +2,7 @@
 
 ```
 xss-lock
+atuin
 ranger
 alacritty
 feh
