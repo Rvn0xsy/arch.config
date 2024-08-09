@@ -70,7 +70,7 @@ ZSH_THEME="bira"
 # Custom plugins may be added to $ZSH_CUSTOM/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions zsh-completions copyfile emoji extract sudo)
+plugins=(git docker zsh-syntax-highlighting zsh-autosuggestions zsh-completions copyfile emoji extract sudo emoji extract)
 
 source $ZSH/oh-my-zsh.sh
 
@@ -101,7 +101,7 @@ source $ZSH/oh-my-zsh.sh
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 ####################################
 # alias config
-
+alias cp='xcp'
 alias ls='lsd'
 alias cd='z'
 alias rm='rmt'
@@ -119,6 +119,7 @@ export PATH=$HOME/scripts:$PATH
 export PATH=$HOME/.local/bin:$PATH
 export VISUAL=/usr/bin/vim
 export PATH=~/.npm/bin:$PATH
+export PATH=$HOME/.atuin/bin:$PATH
 autoload bashcompinit
 bashcompinit
 source $HOME/Git/vcpkg/scripts/vcpkg_completion.zsh
@@ -126,7 +127,14 @@ source $HOME/Git/vcpkg/scripts/vcpkg_completion.zsh
 eval "$(atuin init zsh)"
 [ -f ~/.inshellisense/key-bindings.zsh ] && source ~/.inshellisense/key-bindings.zsh
 
-
+export VCPKG_ROOT=$HOME/Git/vcpkg
+export PATH=$VCPKG_ROOT:$PATH
 export GOENV_ROOT="$HOME/.goenv"
 export PATH="$GOENV_ROOT/bin:$PATH"
 eval "$(goenv init -)"
+
+. "$HOME/.atuin/bin/env"
+. "$HOME/.cargo/env"
+. "$HOME/.config/scripts/zinc_env.sh"
+# 默认情况下关闭中文输入
+fcitx5-remote -s keyboard-us
