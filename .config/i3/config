@@ -9,11 +9,12 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+# set $mod Mod1
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 12
+font pango:monospace 0
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -43,7 +44,6 @@ bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOU
 
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
-
 # move tiling windows via drag & drop by left-clicking into the title bar,
 # or left-clicking anywhere into the window while holding the floating modifier.
 tiling_drag modifier titlebar
@@ -51,12 +51,14 @@ tiling_drag modifier titlebar
 # start a terminal
 # bindsym $mod+Return exec i3-sensible-terminal
 bindsym $mod+Return exec alacritty
+bindsym $mod+Shift+Return floating toggle exec alacritty
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 # bindsym $mod+d exec --no-startup-id dmenu_run
+bindsym $mod+d exec "rofi -combi-modi window,drun,clipboard,ssh -theme Arc -font 'hack 18' -show combi -icon-theme Papirus -show-icons"
 # A more modern dmenu replacement is rofi:
 # bindcode $mod+40 exec "rofi -modi drun,run -show drun"
 # There also is i3-dmenu-desktop which only displays applications shipping a
@@ -137,7 +139,11 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+bindsym $mod+Tab workspace next
+bindsym $mod+Ctrl+Right workspace next
 
+bindsym $mod+Shift+Tab workspace prev
+bindsym $mod+Ctrl+Left workspace prev
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
 bindsym $mod+Shift+2 move container to workspace number $ws2
@@ -155,7 +161,7 @@ bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
 bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
-# bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
+bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -B 'Yes, exit i3' 'i3-msg exit'"
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -165,16 +171,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 30 px or 30 ppt
+        bindsym k resize grow height 30 px or 30 ppt
+        bindsym l resize shrink height 30 px or 30 ppt
+        bindsym semicolon resize grow width 30 px or 30 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 30 px or 30 ppt
+        bindsym Down resize grow height 30 px or 30 ppt
+        bindsym Up resize shrink height 30 px or 30 ppt
+        bindsym Right resize grow width 30 px or 30 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -183,29 +189,18 @@ mode "resize" {
 }
 
 bindsym $mod+r mode "resize"
-
+bindsym $mod+Shift+t exec nautilus
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 # bar {
 #        status_command i3status
 # }
-
-bindsym $mod+d exec "rofi -combi-modi window,drun,ssh,clipboard -theme Arc -font 'hack 10' -show combi -icon-theme Papirus -show-icons"
-
-# Open thunar to manage files.
-
-bindsym $mod+Shift+t exec thunar
-
-bindsym $mod+Shift+x exec rofi-gpaste
-
-exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
-exec_always --no-startup-id albert -p /usr/share/albert/python/plugins/
-exec_always --no-startup-id $HOME/.config/polybar/launch.sh --forest
-
 bindsym ctrl+Shift+a exec flameshot gui
+bindsym ctrl+Shift+l exec --no-startup-id i3lock --nofork -i /usr/share/backgrounds/archlinux/archbtw.png
 
-exec --no-startup-id feh --bg-fill --randomize $HOME/.local/background/*
-
+exec --no-startup-id xrandr --output eDP-1 --mode 3072x1920 --rate 120
+exec --no-startup-id bash $HOME/.config/polybar/launch.sh  --forest
 exec --no-startup-id fcitx5
-
+exec --no-startup-id feh --bg-fill /usr/share/backgrounds/archlinux/conference.png
 exec --no-startup-id flameshot
+exec --no-startup-id picom --config $HOME/.config/picom/picom.conf
