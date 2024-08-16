@@ -195,8 +195,9 @@ bindsym $mod+Shift+t exec nautilus
 #        status_command i3status
 # }
 bindsym ctrl+Shift+a exec flameshot gui
+bindsym $mod+Shift+s exec --no-startup-id alacritty -e spf
 bindsym ctrl+Shift+l exec --no-startup-id i3lock --nofork -i /usr/share/backgrounds/archlinux/archbtw.png
-
+exec --no-startup-id libinput-gestures-setup start
 exec --no-startup-id xrandr --output eDP-1 --mode 3072x1920 --rate 120
 exec --no-startup-id bash $HOME/.config/polybar/launch.sh  --forest
 exec --no-startup-id fcitx5
@@ -218,4 +219,4 @@ for_window [class="Meeting"] floating enable
 for_window [class="org.gnome.Nautilus"] floating enable
 for_window [window_role="GtkFileChooserDialog"] floating enable resize set 1940 880
 for_window [class="org.remmina.Remmina"] layout tabbed
-for_window [class="floating"] floating enable resize set 1940 670,move position center
+for_window [class="floating"] floating enable resize set 1940 670,move position center, move down 500 px
